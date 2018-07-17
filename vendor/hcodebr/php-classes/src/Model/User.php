@@ -2,11 +2,13 @@
 
 namespace Hcode\Model;
 
-use Hcode\DB\Sql;
-use \Hcode\Model;
+use \Hcode\DB\Sql;
+use Hcode\Model;
 
 class User extends Model{
-    private $results;
+
+    const SESSION = "User";
+
     public static function login($login, $password){
         $sql = new Sql();
 
@@ -16,13 +18,35 @@ class User extends Model{
         if (count($results)=== 0){
             throw new \Exception("Usuário inexistente ou senha inválida.");
         }
+
+
         $data = $results[0];
+
         if (password_verify($password,$data["despassword"]) === true){
 
             $user = new User();
-            $user->setiduser($data["idusers"]);
+
+            //$user->setiduser($data["iduser"]);
+
+
+           $user->setData($data);
+
+            $_SESSION[$user::SESSION] = $user->getVALUES();
+
+            return $user;
         }else{
             throw new \Exception("Usuário inexistente ou senha inválida.");
         }
+    }
+    public function verifyLogin($inadmin = true){
+    if(!isset($_SESSION[User::SESSION])|| !$_SESSION[User::SESSION] || !(int)$_SESSION[User::SESSION]["iduser"] > 0 || (bool)$_SESSION[User::SESSION]["inadmin"] !== $inadmin){
+            header("Location:/admin/login");
+            exit;
+            
+
+        }
+    }
+    public static function logout(){
+        $_SESSION[User::SESSION] = NULL;
     }
 }
