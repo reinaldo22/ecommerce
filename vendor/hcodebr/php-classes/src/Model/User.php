@@ -26,7 +26,7 @@ class User extends Model{
 
             $user = new User();
 
-            //$user->setiduser($data["iduser"]);
+            $user->setiduser($data["iduser"]);
 
 
            $user->setData($data);
@@ -38,11 +38,19 @@ class User extends Model{
             throw new \Exception("Usuário inexistente ou senha inválida.");
         }
     }
-    public function verifyLogin($inadmin = true){
-    if(!isset($_SESSION[User::SESSION])|| !$_SESSION[User::SESSION] || !(int)$_SESSION[User::SESSION]["iduser"] > 0 || (bool)$_SESSION[User::SESSION]["inadmin"] !== $inadmin){
+    public static function verifyLogin($inadmin = true){
+    if(
+        !isset($_SESSION[User::SESSION])
+        ||
+        !$_SESSION[User::SESSION]
+        ||
+        !(int)$_SESSION[User::SESSION]["iduser"] > 0
+        ||
+        (bool)$_SESSION[User::SESSION]["inadmin"] !== $inadmin
+    ){
             header("Location:/admin/login");
             exit;
-            
+
 
         }
     }

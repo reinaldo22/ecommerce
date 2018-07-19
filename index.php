@@ -4,6 +4,8 @@ session_start();
 require_once("vendor/autoload.php");
 
 use Hcode\Model\User;
+use Hcode\PageAdmin;
+
 $app = new \Slim\Slim();
 
 
@@ -25,8 +27,8 @@ $app->get('/admin', function() {
 });
 $app->get('/admin/login/', function(){
 
-    $page = new Hcode\PageAdmin(["header"=>false,"footer"=>false]);
-    
+    $page = new PageAdmin(["header"=>false,"footer"=>false]);
+
     $page->setTpl("login");
 
 });
@@ -47,37 +49,12 @@ $app->get('/admin/logout', function(){
 $app->get('/admin/users', function(){
 
     User::verifyLogin();
-    $page = new \Hcode\PageAdmin();
+    $page = new PageAdmin();
     $page->setTpl("users");
-});
-
-$app->get('/admin/users/create', function(){
-
-    User::verifyLogin();
-    $page = new \Hcode\PageAdmin();
-    $page->setTpl("users-create");
-});
-$app->get('/admin/users/:iduser', function($iduser){
-
-    User::verifyLogin();
-    $page = new \Hcode\PageAdmin();
-    $page->setTpl("users-update");
-});
-$app->post('/admin/users/create', function(){
-
-    User::verifyLogin();
 
 });
-$app->post('/admin/users/:iduser', function($iduser){
 
-    User::verifyLogin();
 
-});
-$app->delete('/admin/users/:iduser', function($iduser){
-
-    User::verifyLogin();
-
-});
 
 $app->run();
 
