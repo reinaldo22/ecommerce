@@ -31,7 +31,7 @@ class User extends Model{
 
            $user->setData($data);
 
-            $_SESSION[$user::SESSION] = $user->getVALUES();
+            $_SESSION[User::SESSION] = $user->getVALUES();
 
             return $user;
         }else{

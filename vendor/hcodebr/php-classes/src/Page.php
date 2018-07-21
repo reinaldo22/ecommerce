@@ -12,13 +12,13 @@ class Page {
         "footer"=>true,
         "data"=>[]
     ];
-    public function __construct($opts = array(), $tpl_dir = "C:/xampp/htdocs/ecommerce/views/"){
+    public function __construct($opts = array(), $tpl_dir = "/views/"){
 
         $this->options = array_merge($this->defaults, $opts);
 
         $config = array(
-            "tpl_dir"       => $tpl_dir,
-            "cache_dir"     => "C:/xampp/htdocs/ecommerce/cache/",
+            "tpl_dir"       => $_SERVER['DOCUMENT_ROOT'].$tpl_dir,
+            "cache_dir"     => $_SERVER['DOCUMENT_ROOT']."/cache/",
             "debug"         => false,
         );
         Tpl::configure( $config );
