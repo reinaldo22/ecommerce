@@ -31,7 +31,7 @@
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Sign in to start your session</p>
+    <p class="login-box-msg">Iniciar sessão</p>
 
     <form action="/admin/login" method="post">
       <div class="form-group has-feedback">
@@ -67,7 +67,7 @@
     </div>
     <!-- /.social-auth-links -->
 
-    <a href="/admin/forgot">I forgot my password</a><br>
+    <a href="/admin/forgot">Recuperar senha</a><br>
     <a href="register.html" class="text-center">Register a new membership</a>
 
   </div>
